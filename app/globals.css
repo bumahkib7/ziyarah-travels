@@ -1,26 +1,181 @@
 @import "tailwindcss";
 
+/* Amazon Ember Font Faces */
+@font-face {
+  font-family: 'Amazon Ember';
+  src: url('/fonts/Amazon Ember.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Amazon Ember';
+  src: url('/fonts/Amazon Ember Bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Amazon Ember';
+  src: url('/fonts/Amazon Ember Light.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Amazon Ember';
+  src: url('/fonts/Amazon Ember Medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Amazon Ember Display';
+  src: url('/fonts/Amazon Ember Display.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Amazon Ember Display';
+  src: url('/fonts/Amazon Ember Display Bold Italic.woff') format('woff');
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #fff5f5;
+  --foreground: #1e293b;
+  --primary: #A63A3A;
+  --secondary: #8B2E2E;
+  --accent: #D94A4A;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+  --color-accent: var(--accent);
+  --font-sans: 'Amazon Ember', system-ui, sans-serif;
+  --font-display: 'Amazon Ember Display', system-ui, sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
+  background: #ffffff;
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Amazon Ember', system-ui, sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.dark body {
+  background: #0f172a;
+  color: #f8fafc;
+}
+
+/* Enhanced Glassmorphism utilities */
+.glass {
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+  border-radius: 16px;
+}
+
+.dark .glass {
+  background: rgba(30, 41, 59, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+}
+
+.glass-strong {
+  background: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  border: 1.5px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 10px 35px 0 rgba(31, 38, 135, 0.15);
+  border-radius: 20px;
+}
+
+.dark .glass-strong {
+  background: rgba(30, 41, 59, 0.3);
+  border: 1.5px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 10px 35px 0 rgba(0, 0, 0, 0.3);
+}
+
+.glass-dark {
+  background: rgba(30, 41, 59, 0.3);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+  border-radius: 16px;
+}
+
+/* Reduced animations - only essential ones */
+
+/* Smooth transitions */
+.smooth-transition {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(224, 242, 254, 0.5);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #A63A3A, #8B2E2E);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #8B2E2E, #6B2020);
+}
+
+/* Video background overlay */
+.video-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    135deg,
+    rgba(166, 58, 58, 0.25) 0%,
+    rgba(139, 46, 46, 0.2) 50%,
+    rgba(217, 74, 74, 0.15) 100%
+  );
+}
+
+/* Parallax effect */
+.parallax {
+  transform-style: preserve-3d;
+}
+
+.parallax-layer {
+  transform: translateZ(-1px) scale(2);
 }
