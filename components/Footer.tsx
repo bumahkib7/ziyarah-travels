@@ -3,7 +3,6 @@
 import { Box, Container, Typography } from '@mui/material';
 import Grid from '@mui/material/GridLegacy';
 import { Email, Phone, LocationOn, Facebook, Twitter, Instagram } from '@mui/icons-material';
-import Image from 'next/image';
 
 export default function Footer() {
   return (
@@ -18,11 +17,11 @@ export default function Footer() {
         <Grid container spacing={{ xs: 4, md: 6 }}>
           <Grid item xs={12} md={4}>
             <Box sx={{ mb: 3 }}>
-              <Image
+              <img
                 src="/logo.png"
                 alt="Ziyarah Travels"
-                width={200}
-                height={60}
+                width="200"
+                height="60"
                 style={{ objectFit: 'contain' }}
               />
             </Box>
