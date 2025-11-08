@@ -9,7 +9,7 @@ export default function AboutSection() {
   return (
     <Box id="about" sx={{ py: { xs: 8, md: 12 }, position: 'relative', overflow: 'hidden' }}>
       <AuroraBackground
-        colorStops={['#A63A3A', '#D94A4A', '#8B2E2E']}
+        colorStops={['#8B5CF6', '#EC4899', '#3B82F6']}
         speed={1.5}
         blend={1.2}
         amplitude={1.5}

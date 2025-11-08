@@ -11,7 +11,7 @@ interface AuroraBackgroundProps {
 }
 
 export default function AuroraBackground({
-  colorStops = ['#A63A3A', '#D94A4A', '#8B2E2E'],
+  colorStops = ['#8B5CF6', '#EC4899', '#3B82F6'], // Purple, Pink, Blue
   speed = 1.0,
   blend = 0.5,
   amplitude = 1.0,
