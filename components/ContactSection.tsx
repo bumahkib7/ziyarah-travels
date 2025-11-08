@@ -3,8 +3,44 @@
 import { Box, Container, Typography, Link as MuiLink } from '@mui/material';
 import Grid from '@mui/material/GridLegacy';
 import { Phone, Email, LocationOn, ArrowForward } from '@mui/icons-material';
+import { useState } from 'react';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { Label } from '@/components/ui/label';
 
 export default function ContactSection() {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    message: '',
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    // Simulate form submission
+    setTimeout(() => {
+      setIsSubmitting(false);
+      setSubmitStatus('success');
+      setFormData({ name: '', email: '', phone: '', message: '' });
+
+      // Reset success message after 3 seconds
+      setTimeout(() => setSubmitStatus('idle'), 3000);
+    }, 1000);
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData(prev => ({
+      ...prev,
+      [e.target.name]: e.target.value
+    }));
+  };
+
   return (
     <Box id="contact" sx={{ py: { xs: 10, md: 14 }, background: '#ffffff' }}>
       <Container maxWidth="lg">
@@ -157,27 +193,137 @@ export default function ContactSection() {
             </Box>
           </Grid>
 
-          {/* Right Side - Map */}
+          {/* Right Side - Contact Form */}
           <Grid item xs={12} md={7}>
-            <Box
-              sx={{
-                borderRadius: 4,
-                overflow: 'hidden',
-                height: { xs: 400, md: 550 },
-                boxShadow: '0 4px 20px rgba(166, 58, 58, 0.12)',
-                border: '1px solid rgba(166, 58, 58, 0.1)',
-              }}
-            >
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.756621831697!2d32.58185931475396!3d0.31628999979429415!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x177dbb8d2f5b5555%3A0x5555555555555555!2sKampala%20Road%2C%20Kampala%2C%20Uganda!5e0!3m2!1sen!2sus!4v1699999999999!5m2!1sen!2sus"
-                width="100%"
-                height="100%"
-                style={{ border: 0 }}
-                allowFullScreen
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-              />
-            </Box>
+            <form onSubmit={handleSubmit}>
+              <Box
+                className="glass-strong"
+                sx={{
+                  p: { xs: 4, md: 5 },
+                  borderRadius: 4,
+                  background: 'rgba(255, 255, 255, 0.6)',
+                  backdropFilter: 'blur(20px)',
+                  border: '1px solid rgba(166, 58, 58, 0.1)',
+                  boxShadow: '0 8px 32px rgba(166, 58, 58, 0.08)',
+                }}
+              >
+                <Typography
+                  variant="h4"
+                  sx={{
+                    fontWeight: 700,
+                    color: '#0f172a',
+                    mb: 1,
+                    fontSize: { xs: '1.75rem', md: '2rem' },
+                  }}
+                >
+                  Send us a message
+                </Typography>
+                <Typography
+                  variant="body2"
+                  sx={{
+                    color: '#64748b',
+                    mb: 4,
+                    fontSize: '0.95rem',
+                  }}
+                >
+                  Fill out the form below and we'll get back to you within 24 hours
+                </Typography>
+
+                <Box sx={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+                  {/* Name Field */}
+                  <Box>
+                    <Label htmlFor="name" className="text-slate-900 font-semibold mb-2 block">
+                      Full Name *
+                    </Label>
+                    <Input
+                      id="name"
+                      name="name"
+                      type="text"
+                      placeholder="John Doe"
+                      value={formData.name}
+                      onChange={handleChange}
+                      required
+                      className="h-12 bg-white/80 border-slate-200 focus:border-[#A63A3A] focus:ring-[#A63A3A]"
+                    />
+                  </Box>
+
+                  {/* Email Field */}
+                  <Box>
+                    <Label htmlFor="email" className="text-slate-900 font-semibold mb-2 block">
+                      Email Address *
+                    </Label>
+                    <Input
+                      id="email"
+                      name="email"
+                      type="email"
+                      placeholder="john@example.com"
+                      value={formData.email}
+                      onChange={handleChange}
+                      required
+                      className="h-12 bg-white/80 border-slate-200 focus:border-[#A63A3A] focus:ring-[#A63A3A]"
+                    />
+                  </Box>
+
+                  {/* Phone Field */}
+                  <Box>
+                    <Label htmlFor="phone" className="text-slate-900 font-semibold mb-2 block">
+                      Phone Number
+                    </Label>
+                    <Input
+                      id="phone"
+                      name="phone"
+                      type="tel"
+                      placeholder="+256 700 000 000"
+                      value={formData.phone}
+                      onChange={handleChange}
+                      className="h-12 bg-white/80 border-slate-200 focus:border-[#A63A3A] focus:ring-[#A63A3A]"
+                    />
+                  </Box>
+
+                  {/* Message Field */}
+                  <Box>
+                    <Label htmlFor="message" className="text-slate-900 font-semibold mb-2 block">
+                      Message *
+                    </Label>
+                    <Textarea
+                      id="message"
+                      name="message"
+                      placeholder="Tell us about your travel plans..."
+                      value={formData.message}
+                      onChange={handleChange}
+                      required
+                      rows={5}
+                      className="bg-white/80 border-slate-200 focus:border-[#A63A3A] focus:ring-[#A63A3A] resize-none"
+                    />
+                  </Box>
+
+                  {/* Submit Button */}
+                  <Button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="h-12 bg-gradient-to-r from-[#A63A3A] to-[#8B2E2E] hover:from-[#8B2E2E] hover:to-[#6B2020] text-white font-semibold text-base shadow-lg hover:shadow-xl transition-all duration-300"
+                  >
+                    {isSubmitting ? 'Sending...' : 'Send Message'}
+                  </Button>
+
+                  {/* Success Message */}
+                  {submitStatus === 'success' && (
+                    <Box
+                      sx={{
+                        p: 3,
+                        borderRadius: 2,
+                        background: 'rgba(16, 185, 129, 0.1)',
+                        border: '1px solid rgba(16, 185, 129, 0.3)',
+                      }}
+                    >
+                      <Typography sx={{ color: '#10b981', fontWeight: 600, textAlign: 'center' }}>
+                        Message sent successfully! We'll get back to you soon.
+                      </Typography>
+                    </Box>
+                  )}
+                </Box>
+              </Box>
+            </form>
           </Grid>
         </Grid>
       </Container>
