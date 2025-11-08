@@ -3,10 +3,17 @@
 import { Box, Container, Typography } from '@mui/material';
 import Grid from '@mui/material/GridLegacy';
 import { CheckCircle } from '@mui/icons-material';
+import AuroraBackground from './AuroraBackground';
 
 export default function AboutSection() {
   return (
-    <Box id="about" sx={{ py: { xs: 8, md: 12 } }}>
+    <Box id="about" sx={{ py: { xs: 8, md: 12 }, position: 'relative', overflow: 'hidden' }}>
+      <AuroraBackground
+        colorStops={['#A63A3A', '#D94A4A', '#8B2E2E']}
+        speed={0.8}
+        blend={0.6}
+        amplitude={0.8}
+      >
       <Container maxWidth="lg">
         <Grid container spacing={6} alignItems="center">
           <Grid item xs={12} md={6}>
