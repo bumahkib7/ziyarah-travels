@@ -1,7 +1,6 @@
 'use client';
 
-import { Box, Container, Typography } from '@mui/material';
-import Grid from '@mui/material/GridLegacy';
+import { Box, Container, Typography, Grid } from '@mui/material';
 import { CheckCircle } from '@mui/icons-material';
 import AuroraBackground from './AuroraBackground';
 
@@ -16,7 +15,7 @@ export default function AboutSection() {
       >
       <Container maxWidth="lg">
         <Grid container spacing={6} alignItems="center">
-          <Grid item xs={12} md={6}>
+          <Grid size={{ xs: 12, md: 6 }}>
             <Typography
               variant="h2"
               sx={{
@@ -52,7 +51,7 @@ export default function AboutSection() {
               )}
             </Box>
           </Grid>
-          <Grid item xs={12} md={6}>
+          <Grid size={{ xs: 12, md: 6 }}>
             <Box
               className="glass-strong"
               sx={{
@@ -66,7 +65,7 @@ export default function AboutSection() {
                 Why Choose Us?
               </Typography>
               <Grid container spacing={3}>
-                <Grid item xs={6}>
+                <Grid size={{ xs: 6 }}>
                   <Box sx={{ textAlign: 'center' }}>
                     <Typography variant="h3" sx={{ color: '#A63A3A', fontWeight: 700 }}>
                       10K+
@@ -74,7 +73,7 @@ export default function AboutSection() {
                     <Typography variant="body2" sx={{ color: '#475569', fontWeight: 500 }}>Happy Pilgrims</Typography>
                   </Box>
                 </Grid>
-                <Grid item xs={6}>
+                <Grid size={{ xs: 6 }}>
                   <Box sx={{ textAlign: 'center' }}>
                     <Typography variant="h3" sx={{ color: '#8B2E2E', fontWeight: 700 }}>
                       15+
@@ -82,7 +81,7 @@ export default function AboutSection() {
                     <Typography variant="body2" sx={{ color: '#475569', fontWeight: 500 }}>Years Experience</Typography>
                   </Box>
                 </Grid>
-                <Grid item xs={6}>
+                <Grid size={{ xs: 6 }}>
                   <Box sx={{ textAlign: 'center' }}>
                     <Typography variant="h3" sx={{ color: '#A63A3A', fontWeight: 700 }}>
                       50+
@@ -90,7 +89,7 @@ export default function AboutSection() {
                     <Typography variant="body2" sx={{ color: '#475569', fontWeight: 500 }}>Expert Guides</Typography>
                   </Box>
                 </Grid>
-                <Grid item xs={6}>
+                <Grid size={{ xs: 6 }}>
                   <Box sx={{ textAlign: 'center' }}>
                     <Typography variant="h3" sx={{ color: '#8B2E2E', fontWeight: 700 }}>
                       100%

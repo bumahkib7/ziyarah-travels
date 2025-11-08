@@ -1,8 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Box, Container, Typography, Chip, Card, CardContent, CardMedia, Button, Tabs, Tab, List, ListItem, ListItemIcon, ListItemText } from '@mui/material';
-import Grid from '@mui/material/GridLegacy';
+import { Box, Container, Typography, Chip, Card, CardContent, CardMedia, Button, Tabs, Tab, List, ListItem, ListItemIcon, ListItemText, Grid } from '@mui/material';
 import { CheckCircle, Flight, Hotel, LocalHospital, Restaurant, DirectionsBus, AccountBalance, Group } from '@mui/icons-material';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -290,7 +289,7 @@ export default function PackagesPage() {
       <Container maxWidth="lg" sx={{ py: { xs: 6, md: 10 } }}>
         <Grid container spacing={4}>
           {filteredPackages.map((pkg) => (
-            <Grid item xs={12} md={6} key={pkg.id}>
+            <Grid size={{ xs: 12, md: 6 }} key={pkg.id}>
               <Card
                 sx={{
                   height: '100%',

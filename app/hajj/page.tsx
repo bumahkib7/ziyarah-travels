@@ -1,7 +1,6 @@
 'use client';
 
-import { Box, Container, Typography, Button, Chip, Card, CardContent } from '@mui/material';
-import Grid from '@mui/material/GridLegacy';
+import { Box, Container, Typography, Button, Chip, Card, CardContent, Grid } from '@mui/material';
 import { CheckCircle, FlightTakeoff, Hotel, Restaurant, Security, Group, School } from '@mui/icons-material';
 import Footer from '@/components/Footer';
 import Link from 'next/link';
@@ -204,7 +203,7 @@ export default function HajjPage() {
 
           <Grid container spacing={3}>
             {rituals.map((ritual, index) => (
-              <Grid item xs={12} sm={6} md={4} key={index}>
+              <Grid size={{ xs: 12, sm: 6, md: 4 }} key={index}>
                 <Box
                   sx={{
                     height: '100%',
@@ -320,7 +319,7 @@ export default function HajjPage() {
 
           <Grid container spacing={4} justifyContent="center">
             {hajjPackages.map((pkg, index) => (
-              <Grid item xs={12} md={6} key={index}>
+              <Grid size={{ xs: 12, md: 6 }} key={index}>
                 <Box
                   sx={{
                     borderRadius: 4,

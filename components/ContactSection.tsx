@@ -1,7 +1,6 @@
 'use client';
 
-import { Box, Container, Typography, Link as MuiLink, TextField, Button, Tabs, Tab } from '@mui/material';
-import Grid from '@mui/material/GridLegacy';
+import { Box, Container, Typography, Link as MuiLink, TextField, Button, Tabs, Tab, Grid } from '@mui/material';
 import { Phone, Email, LocationOn, ArrowForward } from '@mui/icons-material';
 import { useState } from 'react';
 
@@ -43,7 +42,7 @@ export default function ContactSection() {
       <Container maxWidth="lg">
         <Grid container spacing={{ xs: 6, md: 8 }}>
           {/* Left Side - Contact Info */}
-          <Grid item xs={12} md={5}>
+          <Grid size={{ xs: 12, md: 5 }}>
             <Typography
               variant="overline"
               sx={{
@@ -191,7 +190,7 @@ export default function ContactSection() {
           </Grid>
 
           {/* Right Side - Form & Map Tabs */}
-          <Grid item xs={12} md={7}>
+          <Grid size={{ xs: 12, md: 7 }}>
             <Box>
               <Tabs
                 value={activeTab}

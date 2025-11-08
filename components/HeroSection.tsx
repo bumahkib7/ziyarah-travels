@@ -1,6 +1,7 @@
 'use client';
 
 import { Box, Container, Typography, Button, Chip } from '@mui/material';
+import SplitText from './SplitText';
 
 export default function HeroSection() {
   return (
@@ -66,8 +67,7 @@ export default function HeroSection() {
               py: 0.5,
             }}
           />
-          <Typography
-            variant="h1"
+          <Box
             sx={{
               fontSize: { xs: '2.8rem', md: '5rem' },
               fontWeight: 800,
@@ -78,10 +78,21 @@ export default function HeroSection() {
               letterSpacing: -1,
             }}
           >
-            Begin Your Sacred Journey
-          </Typography>
-          <Typography
-            variant="h5"
+            <SplitText
+              text="Begin Your Sacred Journey"
+              className=""
+              delay={100}
+              duration={0.6}
+              ease="power3.out"
+              splitType="chars"
+              from={{ opacity: 0, y: 40 }}
+              to={{ opacity: 1, y: 0 }}
+              threshold={0.1}
+              rootMargin="-100px"
+              textAlign="center"
+            />
+          </Box>
+          <Box
             sx={{
               mb: 5,
               color: 'rgba(255, 255, 255, 0.95)',
@@ -93,8 +104,20 @@ export default function HeroSection() {
               textShadow: '0 2px 10px rgba(0,0,0,0.5)',
             }}
           >
-            Experience the spiritual journey of a lifetime with our comprehensive Hajj, Umrah, and Ziyarah packages
-          </Typography>
+            <SplitText
+              text="Experience the spiritual journey of a lifetime with our comprehensive Hajj, Umrah, and Ziyarah packages"
+              className=""
+              delay={80}
+              duration={0.5}
+              ease="power2.out"
+              splitType="words"
+              from={{ opacity: 0, y: 20 }}
+              to={{ opacity: 1, y: 0 }}
+              threshold={0.1}
+              rootMargin="-100px"
+              textAlign="center"
+            />
+          </Box>
           <Box sx={{ display: 'flex', gap: 3, justifyContent: 'center', flexWrap: 'wrap' }}>
             <Button
               variant="contained"

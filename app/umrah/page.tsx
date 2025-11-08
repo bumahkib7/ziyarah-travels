@@ -1,7 +1,6 @@
 'use client';
 
-import { Box, Container, Typography, Button, Chip, Card, CardContent } from '@mui/material';
-import Grid from '@mui/material/GridLegacy';
+import { Box, Container, Typography, Button, Chip, Card, CardContent, Grid } from '@mui/material';
 import { CheckCircle, FlightTakeoff, Hotel, Restaurant, Tour, LocalActivity, Support } from '@mui/icons-material';
 import Footer from '@/components/Footer';
 import Link from 'next/link';
@@ -221,7 +220,7 @@ export default function UmrahPage() {
 
           <Grid container spacing={3}>
             {umrahFeatures.map((feature, index) => (
-              <Grid item xs={12} sm={6} md={4} key={index}>
+              <Grid size={{ xs: 12, sm: 6, md: 4 }} key={index}>
                 <Box
                   sx={{
                     height: '100%',
@@ -337,7 +336,7 @@ export default function UmrahPage() {
 
           <Grid container spacing={4}>
             {umrahPackages.map((pkg, index) => (
-              <Grid item xs={12} md={4} key={index}>
+              <Grid size={{ xs: 12, md: 4 }} key={index}>
                 <Box
                   sx={{
                     borderRadius: 4,

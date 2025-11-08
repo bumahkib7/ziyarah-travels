@@ -1,7 +1,6 @@
 'use client';
 
-import { Box, Container, Typography } from '@mui/material';
-import Grid from '@mui/material/GridLegacy';
+import { Box, Container, Typography, Grid } from '@mui/material';
 import { Email, Phone, LocationOn, Facebook, Twitter, Instagram } from '@mui/icons-material';
 
 export default function Footer() {
@@ -15,7 +14,7 @@ export default function Footer() {
     >
       <Container maxWidth="lg">
         <Grid container spacing={{ xs: 4, md: 6 }}>
-          <Grid item xs={12} md={4}>
+          <Grid size={{ xs: 12, md: 4 }}>
             <Box sx={{ mb: 3 }}>
               <img
                 src="/logo.png"
@@ -49,7 +48,7 @@ export default function Footer() {
               </Box>
             </Box>
           </Grid>
-          <Grid item xs={12} md={4}>
+          <Grid size={{ xs: 12, md: 4 }}>
             <Typography variant="h6" sx={{ fontWeight: 700, mb: 3, color: 'white', fontSize: '1.1rem' }}>
               Quick Links
             </Typography>
@@ -83,7 +82,7 @@ export default function Footer() {
               ))}
             </Box>
           </Grid>
-          <Grid item xs={12} md={4}>
+          <Grid size={{ xs: 12, md: 4 }}>
             <Typography variant="h6" sx={{ fontWeight: 700, mb: 3, color: 'white', fontSize: '1.1rem' }}>
               Follow Us
             </Typography>

@@ -1,7 +1,6 @@
 'use client';
 
-import { Box, Container, Typography, Button, Chip, CardMedia } from '@mui/material';
-import Grid from '@mui/material/GridLegacy';
+import { Box, Container, Typography, Button, Chip, CardMedia, Grid } from '@mui/material';
 import { CheckCircle, AccessTime, Star, PhoneInTalk, Phone, Security, Payment } from '@mui/icons-material';
 
 const packages = [
@@ -91,7 +90,7 @@ export default function PackagesSection() {
 
         <Grid container spacing={4} sx={{ mb: 4 }}>
           {packages.filter(pkg => pkg.popular).map((pkg, index) => (
-            <Grid item xs={12} md={6} key={index}>
+            <Grid size={{ xs: 12, md: 6 }} key={index}>
               <Box
                 className="glass-strong"
                 sx={{
