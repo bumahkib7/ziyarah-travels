@@ -3,6 +3,7 @@
 import { Box, Container, Typography, Chip, IconButton } from '@mui/material';
 import { Flight, Hotel, Restaurant, Groups, Support, Security, ArrowBackIos, ArrowForwardIos } from '@mui/icons-material';
 import { useState, useEffect } from 'react';
+import AuroraBackground from './AuroraBackground';
 
 const services = [
   {
@@ -77,7 +78,13 @@ export default function ServicesSection() {
   const currentService = services[currentSlide];
 
   return (
-    <Box id="services" sx={{ py: { xs: 8, md: 10 } }}>
+    <Box id="services" sx={{ py: { xs: 8, md: 10 }, position: 'relative', overflow: 'hidden' }}>
+      <AuroraBackground
+        colorStops={['#8B5CF6', '#EC4899', '#3B82F6']}
+        speed={1.2}
+        blend={1.0}
+        amplitude={1.2}
+      >
       <Container maxWidth="lg">
         <Box sx={{ textAlign: 'center', mb: 6 }}>
           <Chip
@@ -272,6 +279,7 @@ export default function ServicesSection() {
           </Box>
         </Box>
       </Container>
+      </AuroraBackground>
     </Box>
   );
 }
