@@ -10,9 +10,9 @@ export default function AboutSection() {
     <Box id="about" sx={{ py: { xs: 8, md: 12 }, position: 'relative', overflow: 'hidden' }}>
       <AuroraBackground
         colorStops={['#A63A3A', '#D94A4A', '#8B2E2E']}
-        speed={0.8}
-        blend={0.6}
-        amplitude={0.8}
+        speed={1.5}
+        blend={1.2}
+        amplitude={1.5}
       >
       <Container maxWidth="lg">
         <Grid container spacing={6} alignItems="center">

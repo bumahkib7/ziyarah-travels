@@ -54,11 +54,11 @@ export default function AuroraBackground({
         );
 
         const offset = (i * Math.PI * 2) / 3;
-        const opacity = blend * 0.15 * (1 + Math.sin(time + offset) * 0.5);
+        const opacity = blend * 0.4 * (1 + Math.sin(time + offset) * 0.5);
 
         gradient.addColorStop(0, `${colorStops[i]}${Math.floor(opacity * 255).toString(16).padStart(2, '0')}`);
-        gradient.addColorStop(0.5, `${colorStops[(i + 1) % 3]}${Math.floor(opacity * 0.8 * 255).toString(16).padStart(2, '0')}`);
-        gradient.addColorStop(1, `${colorStops[(i + 2) % 3]}${Math.floor(opacity * 0.6 * 255).toString(16).padStart(2, '0')}`);
+        gradient.addColorStop(0.5, `${colorStops[(i + 1) % 3]}${Math.floor(opacity * 0.9 * 255).toString(16).padStart(2, '0')}`);
+        gradient.addColorStop(1, `${colorStops[(i + 2) % 3]}${Math.floor(opacity * 0.7 * 255).toString(16).padStart(2, '0')}`);
 
         ctx.fillStyle = gradient;
 
