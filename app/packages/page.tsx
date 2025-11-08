@@ -1,15 +1,11 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Box, Container, Typography, Chip, List, ListItem, ListItemIcon, ListItemText } from '@mui/material';
+import { Box, Container, Typography, Chip, Card, CardContent, CardMedia, Button, Tabs, Tab, List, ListItem, ListItemIcon, ListItemText } from '@mui/material';
 import Grid from '@mui/material/GridLegacy';
 import { CheckCircle, Flight, Hotel, LocalHospital, Restaurant, DirectionsBus, AccountBalance, Group } from '@mui/icons-material';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
-import { Badge } from '@/components/ui/badge';
 
 interface Package {
   id: string;
@@ -166,83 +162,13 @@ function getIconForFeature(feature: string): React.ReactElement {
   return <CheckCircle sx={{ color: '#A63A3A' }} />;
 }
 
-function PackageCard({ pkg }: { pkg: Package }) {
-  return (
-    <Card className="h-full overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border-slate-100">
-      <div className="relative">
-        <img
-          src={pkg.image}
-          alt={pkg.name}
-          className="w-full h-60 object-cover"
-        />
-        {pkg.badge && (
-          <Badge className="absolute top-4 right-4 bg-gradient-to-r from-[#A63A3A] to-[#8B2E2E] text-white font-bold px-3 py-1 shadow-lg">
-            {pkg.badge}
-          </Badge>
-        )}
-        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
-          <p className="text-white text-sm font-semibold uppercase tracking-wide">
-            {pkg.category} • {pkg.duration}
-          </p>
-        </div>
-      </div>
-
-      <CardContent className="p-6 flex flex-col flex-grow">
-        <div className="mb-4">
-          <h3 className="text-2xl font-bold text-slate-900 mb-2">{pkg.name}</h3>
-          <p className="text-slate-600 mb-3 leading-relaxed">{pkg.description}</p>
-          <div className="flex items-baseline gap-1">
-            <span className="text-sm text-slate-500">from</span>
-            <span className="text-4xl font-extrabold text-[#A63A3A]">
-              ${pkg.price.toLocaleString()}
-            </span>
-            <span className="text-sm text-slate-500">/person</span>
-          </div>
-        </div>
-
-        <div className="mb-4 flex-grow">
-          <p className="text-xs font-bold text-slate-900 uppercase tracking-wider mb-3">
-            What's Included
-          </p>
-          <List dense sx={{ py: 0 }}>
-            {pkg.features.map((feature, index) => (
-              <ListItem key={index} sx={{ px: 0, py: 0.5 }}>
-                <ListItemIcon sx={{ minWidth: 32 }}>
-                  {getIconForFeature(feature)}
-                </ListItemIcon>
-                <ListItemText
-                  primary={feature}
-                  primaryTypographyProps={{
-                    fontSize: '0.875rem',
-                    color: '#475569',
-                  }}
-                />
-              </ListItem>
-            ))}
-          </List>
-        </div>
-
-        <div className="flex gap-2 mt-auto">
-          <Button
-            asChild
-            className="flex-1 bg-gradient-to-r from-[#A63A3A] to-[#8B2E2E] hover:from-[#8B2E2E] hover:to-[#6B2020] text-white font-bold h-12 shadow-lg hover:shadow-xl transition-all"
-          >
-            <a href="/#contact">Book Now</a>
-          </Button>
-          <Button
-            asChild
-            variant="outline"
-            className="border-[#A63A3A] text-[#A63A3A] hover:bg-[#A63A3A]/5 font-semibold h-12 px-6"
-          >
-            <a href="/#contact">Details</a>
-          </Button>
-        </div>
-      </CardContent>
-    </Card>
-  );
-}
-
 export default function PackagesPage() {
+  const [selectedCategory, setSelectedCategory] = useState<'all' | 'hajj' | 'umrah'>('all');
+
+  const filteredPackages = selectedCategory === 'all'
+    ? packages
+    : packages.filter(pkg => pkg.category === selectedCategory);
+
   return (
     <Box sx={{ minHeight: '100vh', background: '#ffffff' }}>
       <Navbar />
@@ -310,66 +236,259 @@ export default function PackagesPage() {
         </Container>
       </Box>
 
-      {/* Packages Content with Tabs */}
+      {/* Filter Tabs */}
+      <Box sx={{ background: '#ffffff', borderBottom: '1px solid rgba(0,0,0,0.08)', position: 'sticky', top: 70, zIndex: 100 }}>
+        <Container maxWidth="lg">
+          <Tabs
+            value={selectedCategory}
+            onChange={(e, newValue) => setSelectedCategory(newValue)}
+            sx={{
+              '& .MuiTabs-indicator': {
+                background: 'linear-gradient(90deg, #A63A3A 0%, #8B2E2E 100%)',
+                height: 3,
+              },
+            }}
+          >
+            <Tab
+              label="All Packages"
+              value="all"
+              sx={{
+                fontSize: '1rem',
+                fontWeight: 600,
+                color: '#64748b',
+                '&.Mui-selected': { color: '#A63A3A' },
+                textTransform: 'none',
+              }}
+            />
+            <Tab
+              label="Hajj Packages"
+              value="hajj"
+              sx={{
+                fontSize: '1rem',
+                fontWeight: 600,
+                color: '#64748b',
+                '&.Mui-selected': { color: '#A63A3A' },
+                textTransform: 'none',
+              }}
+            />
+            <Tab
+              label="Umrah Packages"
+              value="umrah"
+              sx={{
+                fontSize: '1rem',
+                fontWeight: 600,
+                color: '#64748b',
+                '&.Mui-selected': { color: '#A63A3A' },
+                textTransform: 'none',
+              }}
+            />
+          </Tabs>
+        </Container>
+      </Box>
+
+      {/* Packages Grid */}
       <Container maxWidth="lg" sx={{ py: { xs: 6, md: 10 } }}>
-        <Tabs defaultValue="all" className="w-full">
-          {/* Tab Navigation */}
-          <Box sx={{ mb: 6, display: 'flex', justifyContent: 'center' }}>
-            <TabsList className="grid w-full max-w-md grid-cols-3 bg-slate-100 p-1 h-12">
-              <TabsTrigger
-                value="all"
-                className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-[#A63A3A] data-[state=active]:to-[#8B2E2E] data-[state=active]:text-white font-semibold"
+        <Grid container spacing={4}>
+          {filteredPackages.map((pkg) => (
+            <Grid item xs={12} md={6} key={pkg.id}>
+              <Card
+                sx={{
+                  height: '100%',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  borderRadius: 4,
+                  overflow: 'hidden',
+                  boxShadow: '0 8px 32px rgba(166, 58, 58, 0.12)',
+                  transition: 'all 0.3s ease',
+                  '&:hover': {
+                    transform: 'translateY(-8px)',
+                    boxShadow: '0 16px 48px rgba(166, 58, 58, 0.2)',
+                  },
+                }}
               >
-                All Packages
-              </TabsTrigger>
-              <TabsTrigger
-                value="hajj"
-                className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-[#A63A3A] data-[state=active]:to-[#8B2E2E] data-[state=active]:text-white font-semibold"
-              >
-                Hajj
-              </TabsTrigger>
-              <TabsTrigger
-                value="umrah"
-                className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-[#A63A3A] data-[state=active]:to-[#8B2E2E] data-[state=active]:text-white font-semibold"
-              >
-                Umrah
-              </TabsTrigger>
-            </TabsList>
-          </Box>
+                <Box sx={{ position: 'relative' }}>
+                  <CardMedia
+                    component="img"
+                    height="240"
+                    image={pkg.image}
+                    alt={pkg.name}
+                    sx={{ objectFit: 'cover' }}
+                  />
+                  {pkg.badge && (
+                    <Chip
+                      label={pkg.badge}
+                      sx={{
+                        position: 'absolute',
+                        top: 16,
+                        right: 16,
+                        background: 'linear-gradient(135deg, #A63A3A, #8B2E2E)',
+                        color: 'white',
+                        fontWeight: 700,
+                        fontSize: '0.75rem',
+                        boxShadow: '0 4px 12px rgba(166, 58, 58, 0.4)',
+                      }}
+                    />
+                  )}
+                  <Box
+                    sx={{
+                      position: 'absolute',
+                      bottom: 0,
+                      left: 0,
+                      right: 0,
+                      background: 'linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.7) 100%)',
+                      p: 2,
+                    }}
+                  >
+                    <Typography
+                      variant="caption"
+                      sx={{
+                        color: 'rgba(255, 255, 255, 0.9)',
+                        fontWeight: 600,
+                        textTransform: 'uppercase',
+                        letterSpacing: 1,
+                      }}
+                    >
+                      {pkg.category} • {pkg.duration}
+                    </Typography>
+                  </Box>
+                </Box>
 
-          {/* All Packages Tab */}
-          <TabsContent value="all">
-            <Grid container spacing={4}>
-              {packages.map((pkg) => (
-                <Grid item xs={12} md={6} key={pkg.id}>
-                  <PackageCard pkg={pkg} />
-                </Grid>
-              ))}
-            </Grid>
-          </TabsContent>
+                <CardContent sx={{ p: 3, flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
+                  {/* Package Name & Price */}
+                  <Box sx={{ mb: 2 }}>
+                    <Typography
+                      variant="h5"
+                      sx={{
+                        fontWeight: 700,
+                        color: '#0f172a',
+                        mb: 1,
+                      }}
+                    >
+                      {pkg.name}
+                    </Typography>
+                    <Typography
+                      variant="body2"
+                      sx={{
+                        color: '#64748b',
+                        mb: 2,
+                        lineHeight: 1.6,
+                      }}
+                    >
+                      {pkg.description}
+                    </Typography>
+                    <Box sx={{ display: 'flex', alignItems: 'baseline', gap: 0.5 }}>
+                      <Typography
+                        variant="caption"
+                        sx={{
+                          color: '#64748b',
+                          fontSize: '0.875rem',
+                        }}
+                      >
+                        from
+                      </Typography>
+                      <Typography
+                        variant="h4"
+                        sx={{
+                          fontWeight: 800,
+                          color: '#A63A3A',
+                        }}
+                      >
+                        ${pkg.price.toLocaleString()}
+                      </Typography>
+                      <Typography
+                        variant="caption"
+                        sx={{
+                          color: '#64748b',
+                          fontSize: '0.875rem',
+                        }}
+                      >
+                        /person
+                      </Typography>
+                    </Box>
+                  </Box>
 
-          {/* Hajj Packages Tab */}
-          <TabsContent value="hajj">
-            <Grid container spacing={4}>
-              {packages.filter(pkg => pkg.category === 'hajj').map((pkg) => (
-                <Grid item xs={12} md={6} key={pkg.id}>
-                  <PackageCard pkg={pkg} />
-                </Grid>
-              ))}
-            </Grid>
-          </TabsContent>
+                  {/* Features List */}
+                  <Box sx={{ mb: 3, flexGrow: 1 }}>
+                    <Typography
+                      variant="subtitle2"
+                      sx={{
+                        fontWeight: 700,
+                        color: '#0f172a',
+                        mb: 1.5,
+                        textTransform: 'uppercase',
+                        fontSize: '0.75rem',
+                        letterSpacing: 1,
+                      }}
+                    >
+                      What's Included
+                    </Typography>
+                    <List dense sx={{ py: 0 }}>
+                      {pkg.features.map((feature, index) => (
+                        <ListItem key={index} sx={{ px: 0, py: 0.5 }}>
+                          <ListItemIcon sx={{ minWidth: 32 }}>
+                            {getIconForFeature(feature)}
+                          </ListItemIcon>
+                          <ListItemText
+                            primary={feature}
+                            primaryTypographyProps={{
+                              fontSize: '0.875rem',
+                              color: '#475569',
+                            }}
+                          />
+                        </ListItem>
+                      ))}
+                    </List>
+                  </Box>
 
-          {/* Umrah Packages Tab */}
-          <TabsContent value="umrah">
-            <Grid container spacing={4}>
-              {packages.filter(pkg => pkg.category === 'umrah').map((pkg) => (
-                <Grid item xs={12} md={6} key={pkg.id}>
-                  <PackageCard pkg={pkg} />
-                </Grid>
-              ))}
+                  {/* CTA Buttons */}
+                  <Box sx={{ display: 'flex', gap: 1.5 }}>
+                    <Button
+                      variant="contained"
+                      fullWidth
+                      href="/#contact"
+                      sx={{
+                        background: 'linear-gradient(135deg, #A63A3A, #8B2E2E)',
+                        color: 'white',
+                        fontWeight: 700,
+                        py: 1.5,
+                        borderRadius: 2,
+                        textTransform: 'none',
+                        fontSize: '1rem',
+                        boxShadow: '0 4px 14px rgba(166, 58, 58, 0.3)',
+                        '&:hover': {
+                          background: 'linear-gradient(135deg, #8B2E2E, #A63A3A)',
+                          boxShadow: '0 6px 20px rgba(166, 58, 58, 0.4)',
+                        },
+                      }}
+                    >
+                      Book Now
+                    </Button>
+                    <Button
+                      variant="outlined"
+                      href="/#contact"
+                      sx={{
+                        borderColor: '#A63A3A',
+                        color: '#A63A3A',
+                        fontWeight: 600,
+                        py: 1.5,
+                        px: 3,
+                        borderRadius: 2,
+                        textTransform: 'none',
+                        fontSize: '1rem',
+                        '&:hover': {
+                          borderColor: '#8B2E2E',
+                          background: 'rgba(166, 58, 58, 0.05)',
+                        },
+                      }}
+                    >
+                      Details
+                    </Button>
+                  </Box>
+                </CardContent>
+              </Card>
             </Grid>
-          </TabsContent>
-        </Tabs>
+          ))}
+        </Grid>
 
         {/* Contact CTA Section */}
         <Box
@@ -403,11 +522,26 @@ export default function PackagesPage() {
             Our experienced team is here to help you select the perfect package for your spiritual journey
           </Typography>
           <Button
-            asChild
-            size="lg"
-            className="bg-gradient-to-r from-[#A63A3A] to-[#8B2E2E] hover:from-[#8B2E2E] hover:to-[#6B2020] text-white font-bold text-lg px-8 py-6 shadow-lg hover:shadow-xl transition-all"
+            variant="contained"
+            size="large"
+            href="/#contact"
+            sx={{
+              background: 'linear-gradient(135deg, #A63A3A, #8B2E2E)',
+              color: 'white',
+              fontWeight: 700,
+              px: 5,
+              py: 1.5,
+              borderRadius: 2,
+              textTransform: 'none',
+              fontSize: '1.1rem',
+              boxShadow: '0 4px 14px rgba(166, 58, 58, 0.3)',
+              '&:hover': {
+                background: 'linear-gradient(135deg, #8B2E2E, #A63A3A)',
+                boxShadow: '0 6px 20px rgba(166, 58, 58, 0.4)',
+              },
+            }}
           >
-            <a href="/#contact">Contact Our Team</a>
+            Contact Our Team
           </Button>
         </Box>
       </Container>
